@@ -1,0 +1,18 @@
+package me.//.ManHunt;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+public class reloader extends BukkitRunnable{   
+	public static String nametwo;
+	public static Player player;
+	@Override
+	public void run() {
+		if(player!= null)
+    	  setRun();
+	}
+	private void setRun()
+	{
+		 player.setCompassTarget(Bukkit.getPlayer(nametwo).getLocation()); 
+	}
+}
