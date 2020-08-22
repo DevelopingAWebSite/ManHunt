@@ -1,0 +1,31 @@
+package me.//.ManHunt;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
+public class compass implements CommandExecutor {
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if(label.equalsIgnoreCase("Compass"))
+		{
+			if(!(sender instanceof Player))
+			{
+				sender.sendMessage("Console can't get a compass!");
+				return true;
+			}
+			Player e = (Player) sender;
+			ItemStack compass = main.getCompassItem();
+			PlayerInventory pi = e.getInventory();
+			pi.addItem(compass);
+			e.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "You received a tracker!" );
+			return true;
+		}
+		return false;
+	}
+        
+}
