@@ -1,0 +1,35 @@
+package me.//.ManHunt;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class track implements CommandExecutor{
+	  public String nameone;
+	  public Player player;
+	  public Player player2;
+	  public Location location;
+	  reloader Reload;
+	@SuppressWarnings("static-access")
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if(label.equalsIgnoreCase("Track"))
+		{	
+			setVariables(sender,args);
+			Reload.nametwo = args[0];
+			Reload.player = player2;
+			return true;
+			
+		}
+		return false;
+	}
+	private void setVariables(CommandSender sender,String[] args)
+	{
+		player = (Player) Bukkit.getPlayer(args[0]);
+		player2 = (Player) sender;
+		location = player.getLocation();
+	}
+}
