@@ -1,0 +1,64 @@
+package me.//.ManHunt;
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class main extends JavaPlugin implements Listener{
+	 track trackMethod = new track();
+	 reloader Reloader;
+
+	@Override
+	public void onEnable()
+	{
+		this.getCommand("Compass").setExecutor(new compass());
+		this.getCommand("Track").setExecutor(new track());
+		this.getServer().getPluginManager().registerEvents(this, this);
+		Reloader = new reloader();
+		Reloader.runTaskTimer(this,0,20);
+    }
+	
+	@Override
+	public void onDisable()
+	{
+	     // on shutdown.
+	}
+	// /Hello command!
+	@EventHandler
+	public void onRespawnPlayer(PlayerRespawnEvent e)
+	{
+		Player player = e.getPlayer();
+		PlayerInventory pi = player.getInventory();
+		ItemStack compass = getCompassItem();
+		pi.addItem(compass);
+	}
+	static ItemStack getCompassItem()
+	{
+		ItemStack compass = new ItemStack(Material.COMPASS);
+		ItemMeta meta = compass.getItemMeta();
+		meta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Tracker");
+		List<String> lore = new ArrayList<String>();
+		lore.add("");
+		lore.add(ChatColor.GOLD + "" + ChatColor.ITALIC + "Always pointing towards the speedrunner!");
+		meta.setLore(lore);
+		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		compass.setItemMeta(meta);
+		return compass;
+	}
+
+}
